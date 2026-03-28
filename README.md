@@ -127,9 +127,9 @@ Three models were trained and evaluated on an 80/20 stratified split:
 
 | Model | Accuracy | Precision | Recall | ROC-AUC |
 |---|---|---|---|---|
-| Naive Bayes | 96.86% | 99.14% | 77.18% | 98.02% |
-| Logistic Regression | 97.31% | 88.39% | 91.95% | 98.35% |
-| Linear SVM | 98.39% | 95.80% | 91.95% | 98.33% |
+| Naive Bayes | 96.86% | 99.14% | 77.18% | 0.9802 |
+| Logistic Regression | 97.31% | 88.39% | 91.95% | 0.9835 |
+| Linear SVM | 98.39% | 95.80% | 91.95% | 0.9833|
 
 **Key observations:**
 
