@@ -2,6 +2,24 @@
 
 A machine learning pipeline that classifies SMS messages as **spam** or **ham (legitimate)**, with a live Streamlit web app featuring SHAP explainability.
 
+[![Live App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://spam-detection-ds3c6sqyrcobxvrygbf5ps.streamlit.app/)
+
+---
+
+## 📌 Table of Contents
+
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Pipeline](#pipeline)
+- [Model Comparison](#model-comparison)
+- [Final Model & Tuning](#final-model--tuning)
+- [Results](#results)
+- [Streamlit App](#streamlit-app)
+- [SHAP Explainability](#shap-explainability)
+- [Tech Stack](#tech-stack)
+
 ---
 
 ## Overview
@@ -33,7 +51,7 @@ SpamGuard is an end-to-end NLP classification project that:
 
 ---
 
-## Installation
+## Installation (locally)
 
 **1. Clone the repo and create a virtual environment:**
 
@@ -109,17 +127,16 @@ Three models were trained and evaluated on an 80/20 stratified split:
 
 | Model | Accuracy | Precision | Recall | ROC-AUC |
 |---|---|---|---|---|
-| Naive Bayes | 96.95% | 85.71% | 92.62% | 98.38% |
-| Logistic Regression | 97.58% | 90.13% | 91.95% | 98.37% |
-| Linear SVM | 95.16% | 76.24% | 92.62% | 98.12% |
+| Naive Bayes | 96.86% | 99.14% | 77.18% | 98.02% |
+| Logistic Regression | 97.31% | 88.39% | 91.95% | 98.35% |
+| Linear SVM | 98.39% | 95.80% | 91.95% | 98.33% |
 
 **Key observations:**
 
-- All three models achieve strong ROC-AUC (~0.98), indicating good overall discrimination.
-- Logistic Regression leads on accuracy and precision — fewest false positives (ham flagged as spam).
-- Linear SVM has the lowest precision out of the box, but responds well to hyperparameter tuning.
-- Naive Bayes is a reliable, fast baseline for text classification tasks.
-
+- **Linear SVM wins overall** — highest accuracy (98.39%) and precision (95.80%), making it the best fit for production.
+- **Naive Bayes struggles with recall** — misses ~23% of spam messages despite near-perfect precision (99.14%).
+- **Logistic Regression is the safest baseline** — balanced across all metrics but outperformed by Linear SVM.
+- **All models score ~0.98 ROC-AUC** — differences come down to precision and recall, not overall discrimination.
 ---
 
 ## Final Model & Tuning
@@ -163,8 +180,8 @@ param_grid = {
 ```
                  Predicted
                  Ham    Spam
-Actual  Ham   [ TN     FP ]
-        Spam  [ FN     TP ]
+Actual  Ham   [ 960     6 ]
+        Spam  [ 12     137 ]
 ```
 
 The tuned model significantly reduces false positives compared to the untuned SVM, making it safe for production use.
@@ -184,7 +201,7 @@ The web app (`app.py`) provides a simple, clean interface for real-time spam cla
 - Expandable SHAP values table with token-level breakdown
 - Preprocessed text preview (after cleaning and lemmatization)
 
-**Run it:**
+**Run it (*locally*):**
 
 ```bash
 streamlit run app.py
@@ -218,7 +235,7 @@ This makes the model transparent and auditable — you can see exactly why a mes
 | Model persistence | `joblib` |
 | Explainability | `shap` |
 | Visualisation | `matplotlib`, `seaborn` |
-| Web app | `streamlit` |
+| Live Web app | `streamlit cloud` |
 
 ---
 
