@@ -10,7 +10,6 @@ A machine learning pipeline that classifies SMS messages as **spam** or **ham (l
 
 - [Overview](#overview)
 - [Dataset](#dataset)
-- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Pipeline](#pipeline)
 - [Model Comparison](#model-comparison)
